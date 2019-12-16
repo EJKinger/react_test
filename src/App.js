@@ -6,6 +6,11 @@ const userData = [
     name: "ejkinger",
     company: "watchdogger",
     avatar_url: "https://avatars2.githubusercontent.com/u/12090906?v=4"
+  },
+  {
+    name: "brian-brazil",
+    company: "prometheus",
+    avatar_url: "https://avatars0.githubusercontent.com/u/7115638?v=4"
   }
 ]
 
@@ -17,7 +22,9 @@ const CardList = (props) => {
 
   return (
     <div>
-      <Card {...props}/>
+      {props.users.map((user, i) => {
+        return <Card {...user}/>
+      })}
     </div>
   );
 }
@@ -42,7 +49,7 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           {this.props.title}
-          <CardList {...userData[0]}/>
+          <CardList users={userData}/>
         </header>
       </div>
     );
