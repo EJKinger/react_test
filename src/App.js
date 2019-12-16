@@ -1,44 +1,52 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 
-function Button(props) {
-  return (
-    <button onClick={() => {props.handleClick(props.inc)}} id="button-inc">+{props.inc}</button>
-  )
-}
+const userData = [
+  {
+    name: "ejkinger",
+    company: "watchdogger",
+    avatar_url: "https://avatars2.githubusercontent.com/u/12090906?v=4"
+  }
+]
 
-function Display(props) {
-  return (
-    <div>{props.message}</div>
-  )
-}
-
-function App(props) {
-  let [counter, setCounter] = useState(0)
-  const handleClick = (val) => setCounter(counter+val)
+const CardList = (props) => {
+  let u;
+  for (u in props.users) {
+    console.log(u)
+  }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Button handleClick={handleClick} inc={1}/>
-        <Button handleClick={handleClick} inc={10}/>
-        <Button handleClick={handleClick} inc={100}/>
-        <p>
-          <Display message={counter}/> Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Card {...props}/>
     </div>
   );
+}
+
+class Card extends React.Component {
+  render() {
+    return (
+      <div className="github-profile">
+        <img src={this.props.avatar_url} alt="profile" />
+        <div className="github-info">
+          <div className="github-name">{this.props.name}</div>
+          <div className="github-company">{this.props.company}</div>
+        </div>
+      </div>
+    );
+  }
+}
+
+class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          {this.props.title}
+          <CardList {...userData[0]}/>
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;
